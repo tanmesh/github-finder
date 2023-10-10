@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import React from 'react'
 import Spinner from "../shared/Spinner";
 import UserContext from "../../context/users/UserContext";
 import UserItem from "./UserItem";
 
 function UserResults() {
-  const { users, isLoading } = useContext(UserContext)
+  const { users, isLoading, searchUsers } = useContext(UserContext)
+
+  useEffect(() => {
+    if (!users || users.length === 0) {
+      searchUsers()
+    }
+  }, [])
 
   return isLoading ?
     <Spinner />

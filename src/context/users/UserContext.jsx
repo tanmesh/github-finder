@@ -7,7 +7,9 @@ const UserContext = createContext()
 export const UserProvider = ({ children }) => {
     const initialState = {
         users: [],
-        isLoading: false
+        user: {},
+        isLoading: false,
+        repos: [],
     }
 
     const [state, dispatch] = useReducer(userReducer, initialState)
@@ -18,6 +20,27 @@ export const UserProvider = ({ children }) => {
         })
     }
 
+    const getUser = async (login) => {
+        setLoading()
+
+        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`
+            , {
+                headers: {
+                    Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+                }
+            });
+
+        if (response.status === 404) {
+            window.location = '/notfound'
+        } else {
+            const user = await response.json()
+            dispatch({
+                type: 'GET_USER',
+                payload: user,
+            })
+        }
+    }
+
     const searchUsers = async (user) => {
         setLoading()
 
@@ -25,13 +48,44 @@ export const UserProvider = ({ children }) => {
             q: user
         })
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`);
+        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`
+            , {
+                headers: {
+                    Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+                }
+            });
         const { items } = await response.json()
 
         dispatch({
-            type: 'GET_USER',
+            type: 'GET_USERS',
             payload: items
         })
+    }
+
+    const getRepos = async (login) => {
+        setLoading()
+
+        const params = new URLSearchParams({
+            sort: 'created',
+            per_page: 10
+        })
+
+        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos?${params}`
+            , {
+                headers: {
+                    Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+                }
+            });
+
+        if (response.status === 404) {
+            window.location = '/notfound'
+        } else {
+            const data = await response.json()
+            dispatch({
+                type: 'GET_REPOS',
+                payload: data,
+            })
+        }
     }
 
     const clearUsers = () => {
@@ -46,6 +100,10 @@ export const UserProvider = ({ children }) => {
             searchUsers,
             clearUsers,
             isLoading: state.isLoading,
+            user: state.user,
+            getUser,
+            getRepos,
+            repos: state.repos,
         }}>
         {children}
     </UserContext.Provider>
