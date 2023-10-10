@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import React from 'react'
 import Spinner from "../shared/Spinner";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../context/users/UserContext";
 import UserItem from "./UserItem";
 
 function UserResults() {
   const { users, isLoading } = useContext(UserContext)
-
-  console.log(users)
 
   return isLoading ?
     <Spinner />

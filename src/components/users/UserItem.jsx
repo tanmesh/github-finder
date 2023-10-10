@@ -1,8 +1,7 @@
-import PropType from 'prop-types'
 import { Link } from 'react-router-dom'
 import React from 'react'
 
-function UserItem({ user: { id, login, avatar_url } }) {
+function UserItem({ user: { login, avatar_url } }) {
     return (
         <div className='card shadow-md compact side bg-base-100'>
             <div className='flex-row items-center space-x-4 card-body'>
@@ -20,10 +19,6 @@ function UserItem({ user: { id, login, avatar_url } }) {
             </div>
         </div>
     )
-}
-
-UserItem.prototype = {
-    item: PropType.object.isRequired,
 }
 
 export default UserItem

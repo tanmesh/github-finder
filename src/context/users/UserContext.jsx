@@ -18,28 +18,14 @@ export const UserProvider = ({ children }) => {
         })
     }
 
-    // // Only for testing 
-    // const fetchUsers = async () => {
-    //     setLoading()
-
-    //     const response = await fetch("https://api.github.com/users");
-    //     const data = await response.json()
-
-    //     dispatch({
-    //         type: 'GET_USER',
-    //         payload: data
-    //     })
-    // }
-
     const searchUsers = async (user) => {
         setLoading()
 
-        console.log("user ", user)
         const params = new URLSearchParams({
             q: user
         })
 
-        const response = await fetch(`https://api.github.com/search/users?${params}`);
+        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`);
         const { items } = await response.json()
 
         dispatch({
