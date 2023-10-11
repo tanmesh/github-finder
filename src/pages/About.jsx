@@ -9,7 +9,7 @@ function About() {
           About This Project
         </h3>
 
-        <p>This is a React app to find Github user profiles</p>
+        <p>This is a React app to find Github user profiles.</p>
         <p className="mb-3 text-black">Version: 1.0.0</p>
         <p><Link to="/" className='btn btn-black btn-sm'>Back to Home</Link></p>
       </div>
