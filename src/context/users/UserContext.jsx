@@ -23,7 +23,10 @@ export const UserProvider = ({ children }) => {
     const getUser = async (login) => {
         setLoading()
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`);
+        const response = await fetch(`https://api.github.com/users/${login}`);
+
+        // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`);
+
         // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`
         //     , {
         //         headers: {
@@ -49,7 +52,10 @@ export const UserProvider = ({ children }) => {
             q: user
         })
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`);
+        const response = await fetch(`https://api.github.com/search/users?${params}`);
+
+        // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`);
+
         // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`
         //     , {
         //         headers: {
@@ -72,7 +78,10 @@ export const UserProvider = ({ children }) => {
             per_page: 10
         })
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos?${params}`);
+        const response = await fetch(`https://api.github.com/users/${login}/repos?${params}`);
+
+        // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos?${params}`);
+
         // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos?${params}`
         //     , {
         //         headers: {
