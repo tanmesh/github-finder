@@ -23,12 +23,13 @@ export const UserProvider = ({ children }) => {
     const getUser = async (login) => {
         setLoading()
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`
-            , {
-                headers: {
-                    Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
-                }
-            });
+        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`);
+        // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}`
+        //     , {
+        //         headers: {
+        //             Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+        //         }
+        //     });
 
         if (response.status === 404) {
             window.location = '/notfound'
@@ -48,12 +49,13 @@ export const UserProvider = ({ children }) => {
             q: user
         })
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`
-            , {
-                headers: {
-                    Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
-                }
-            });
+        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`);
+        // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`
+        //     , {
+        //         headers: {
+        //             Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+        //         }
+        //     });
         const { items } = await response.json()
 
         dispatch({
@@ -70,12 +72,13 @@ export const UserProvider = ({ children }) => {
             per_page: 10
         })
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos?${params}`
-            , {
-                headers: {
-                    Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
-                }
-            });
+        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos?${params}`);
+        // const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos?${params}`
+        //     , {
+        //         headers: {
+        //             Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+        //         }
+        //     });
 
         if (response.status === 404) {
             window.location = '/notfound'
