@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# GitHub Finder App Design Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+The GitHub Finder App is a straightforward yet powerful React application designed to display GitHub user profiles. It offers essential functionalities for searching and viewing information from GitHub profiles, including recent repositories. The application leverages GitHub APIs for accessing user data and incorporates advanced features like state and effect hooks, context, and a reducer for state management. This document outlines the main functionalities and provides insights into the app's architecture.
 
-In the project directory, you can run:
+## Main Functionalities
 
-### `npm start`
+The GitHub Finder App provides the following primary functionalities:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **User Search:** Users can search for a specific GitHub user by entering their username. The app utilizes the GitHub API to fetch user data.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **User Profile Display:** The app displays essential information from the user's GitHub profile, including their name, bio, location, avatar, and a link to their GitHub profile.
 
-### `npm test`
+3. **Recent Repositories:** Users can view a list of recent repositories from the user's profile, along with important details such as repository name, description, and the number of stars and forks.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+The GitHub Finder App is built using the following technologies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React:** The core framework for building the user interface.
+- **GitHub API:** Utilized to access user data and repositories from GitHub profiles.
+- **State Hook:** Used to manage the application's state within React components.
+- **Effect Hook:** Employed for handling side effects, such as fetching data from the GitHub API.
+- **Context:** Utilized for managing and providing application-level state and functions to child components.
+- **Reducer:** Applied for complex state management, especially for handling user and repository data.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Application Architecture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The application follows a component-based architecture and uses the following key components:
 
-### `npm run eject`
+1. **App.js:** The main application component that wraps the entire app. It sets up the context provider for managing user and repository data.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Search.js:** This component handles the user search input and interaction. It triggers the user data fetch from the GitHub API.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **User.js:** Responsible for displaying the user's profile information.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. **Repos.js:** Displays the list of recent repositories and their details.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. **Alert.js:** Provides alerts or messages to the user based on specific actions or results.
 
-## Learn More
+## Data Retrieval
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The GitHub Finder App fetches user data and repositories using the GitHub API. The API requests are triggered when a user is searched, and the data is retrieved in JSON format.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+The project structure is organized as follows:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **src**
+  - **components**: Contains the React components for the application. Like repos, assets, layout, shared, users 
+  - **context**: Holds the context and context provider for managing user and repository data.
+  
+## Getting Started
 
-### Analyzing the Bundle Size
+To run the GitHub Finder App on your local machine, follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Clone the repository.
+2. Install the necessary dependencies using `npm install`.
+3. Start the development server using `npm start`.
 
-### Making a Progressive Web App
+## Conclusion
+The GitHub Finder App is a user-friendly and functional application for exploring GitHub user profiles and their recent repositories. It effectively showcases the implementation of core React concepts and tools, including state and effect hooks, context for state management, and the use of a reducer for handling complex data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Future Work
+While the GitHub Finder App already offers a valuable set of features, there are several areas of potential improvement and expansion:
 
-### Advanced Configuration
+**User Authentication**: Consider adding user authentication to enable users to save their favorite profiles and personalize their experience.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Advanced Search Filters**: Enhance the search functionality with filters and sorting options to provide more comprehensive and tailored search results.
 
-### Deployment
+**User Profile Comparison**: Allow users to compare multiple GitHub profiles side by side, making it easier to analyze and contrast different users.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Data Visualization**: Incorporate data visualization libraries to represent statistics about a user's repositories, such as commit history, programming languages used, and more.
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+These four future work suggestions aim to make the GitHub Finder App even more robust and feature-rich. Prioritize enhancements that align with your project's goals and user needs, and consider actively engaging with the user community for feedback and feature requests.
