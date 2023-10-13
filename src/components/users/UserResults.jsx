@@ -3,13 +3,18 @@ import React from 'react'
 import Spinner from "../shared/Spinner";
 import UserContext from "../../context/users/UserContext";
 import UserItem from "./UserItem";
+import { searchUsers } from "../../context/users/UserActions";
 
 function UserResults() {
-  const { users, isLoading, searchUsers } = useContext(UserContext)
+  const { users, dispatch, isLoading } = useContext(UserContext)
 
   useEffect(() => {
-    if (!users || users.length === 0) {
-      searchUsers()
+    const clearData = async () => {
+      if (!users || users.length === 0) {
+        dispatch({ type: 'SET_LOADING' })
+        const users = await searchUsers()
+        dispatch({ type: 'GET_USERS', payload: users })
+      }
     }
   }, [])
 

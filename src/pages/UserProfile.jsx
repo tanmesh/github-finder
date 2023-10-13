@@ -4,18 +4,28 @@ import { useParams, Link } from 'react-router-dom'
 import Spinner from '../components/shared/Spinner'
 import UserContext from '../context/users/UserContext'
 import RepoList from '../components/Repos/RepoList'
+import { getUser, getRepos } from '../context/users/UserActions'
 
 function UserProfile() {
-    const { getUser, user, isLoading, getRepos, repos } = useContext(UserContext)
+    const { user, isLoading, dispatch, repos } = useContext(UserContext)
 
     const param = useParams()
 
     useEffect(
         () => {
-            getUser(param.login)
-            getRepos(param.login)
+            dispatch({ type: 'SET_LOADING' })
+
+            const getUserData = async () => {
+                const user = await getUser(param.login)
+                dispatch({ type: 'GET_USER', payload: user, })
+
+                const data = await getRepos(param.login)
+                dispatch({ type: 'GET_REPOS', payload: data, })
+            }
+
+            getUserData()
         },
-        []
+        [dispatch, param.login]
     )
 
     const {
@@ -73,7 +83,7 @@ function UserProfile() {
                         </h1>
                         <p>{bio}</p>
                         <div className="mt-4 card-actions">
-                            <a href={html_url} target='_blank' rel='nonreferrer'
+                            <a href={html_url} target='_blank' rel='noreferrer'
                                 className='btn btn-outline'>Visit Github profile</a>
                         </div>
                     </div>
@@ -148,7 +158,7 @@ function UserProfile() {
                 </div>
             </div>
 
-            <RepoList repos={repos}/>
+            <RepoList repos={repos} />
         </div>
     </>)
 
